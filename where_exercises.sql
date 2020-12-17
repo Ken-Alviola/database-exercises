@@ -14,7 +14,7 @@ where first_name = 'Vidya' or first_name = 'Irena' or first_name = 'Maya';#709 r
 #4 Find all current or previous employees with first names 'Irena', 'Vidya', or 'Maya', using OR, and who is male. Enter a comment with the number of records returned.
 select *
 from employees
-where first_name in ('Irena','Vidya','Maya')
+where (first_name = 'Vidya' or first_name = 'Irena' or first_name = 'Maya')
 and gender = 'M'; #441 records
 
 #5 Find all current or previous employees whose last name starts with 'E'. Enter a comment with the number of employees whose last name starts with E.
