@@ -66,4 +66,4 @@ where last_name like '%q%';#1873 records with q in last name
 select *
 from `employees`
 where last_name like '%q%'
-and not last_name like '%qu%';#547 employees wtih q in name but not quick
+and not last_name like '%qu%';#547 employees wtih q in name but not qu
