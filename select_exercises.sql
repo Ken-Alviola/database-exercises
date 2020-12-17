@@ -2,8 +2,7 @@
 use `albums_db`;
 
 #Explore the structure of the albums table.
-select *
-from albums;
+Describe albums;
 
 #The name of all albums by Pink Floyd
 select name
