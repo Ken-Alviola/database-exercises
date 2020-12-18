@@ -31,4 +31,5 @@ limit 5 offset 45;
 
 #LIMIT and OFFSET can be used to create multiple pages of data. What is the relationship between OFFSET (number of results to skip), LIMIT (number of results per page), and the page number?
 
-Page_number = (limit + offset)/limit 
+Page_number = (limit + offset)/limit
+Where offset is a multiple of limit 
