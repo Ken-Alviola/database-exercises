@@ -45,9 +45,9 @@ from employees
 group by username
 order by count(*) DESC;#Yes duplicates
 
-select concat(substr(lower(first_name),1,1),substr(lower(last_name),1,4),'_',substr(birth_date,6,2),substr(birth_date,3,2)) as username, 
+select distinct concat(substr(lower(first_name),1,1),substr(lower(last_name),1,4),'_',substr(birth_date,6,2),substr(birth_date,3,2)) as username, 
 	count(*)
 from employees
 group by username
-order by count(*) DESC
-limit 13251;#Bonus 13251 duplicate usernames. I wasn't able to get a where statement to work to show only the usernames with 2 or more. Instead i just kept adjusting the limit until only the usernames with a count of 2 or more showed up. Total n00b move but it works.
+having (count(username) > 1)
+order by count(*) DESC;#Bonus 13251 duplicate usernames. Took the suggestion of using Having instead of Where and it works.
