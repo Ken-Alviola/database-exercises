@@ -45,7 +45,7 @@ from employees
 group by username
 order by count(*) DESC;#Yes duplicates
 
-select distinct concat(substr(lower(first_name),1,1),substr(lower(last_name),1,4),'_',substr(birth_date,6,2),substr(birth_date,3,2)) as username, 
+select concat(substr(lower(first_name),1,1),substr(lower(last_name),1,4),'_',substr(birth_date,6,2),substr(birth_date,3,2)) as username, 
 	count(*)
 from employees
 group by username
