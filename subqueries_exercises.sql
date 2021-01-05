@@ -35,22 +35,13 @@ SELECT first_name, last_name, gender
 FROM employees
 WHERE emp_no IN (
     SELECT emp_no
-    FROM dept_manager)
-and gender = 'F'
-;
+    FROM dept_manager
+    where to_date > curdate())
+and gender = 'F';
 /*Isamu	Legleitner	F
-Shirish	Ossenbruggen	F
 Karsten	Sigstam	F
-Krassimir	Wegerle	F
-Rosine	Cools	F
 Leon	DasSarma	F
-Peternela	Onuegbe	F
-Rutger	Hofmeyr	F
-Sanjoy	Quadeer	F
-Hilary	Kambil	F
-Tonny	Butterworth	F
-Marjo	Giarratana	F
-Xiaobin	Spinelli	F*/
+Hilary	Kambil	F*/
 
 #5. Find all the employees who currently have a higher salary than the companies overall, historical average salary.
 select first_name, last_name, salary
@@ -90,7 +81,8 @@ join dept_emp using (emp_no)
 join departments using (dept_no)
 WHERE emp_no IN (
     SELECT emp_no
-    FROM dept_manager)
+    FROM dept_manager
+    where to_date > curdate())
 and gender = 'F'
 ;
 
