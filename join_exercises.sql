@@ -211,13 +211,12 @@ join employees using (emp_no); #needs work on using correct joins
 
 
 #11. Bonus Who is the highest paid employee within each department.
-select dept_name, first_name, last_name, dept_name, max(salary)
+select dept_name, max(salary)
 from departments
 join dept_emp using (dept_no)
 join employees using (emp_no)
 join salaries using (emp_no)
 where dept_emp.to_date > curdate()
 and salaries.to_date > curdate()
-group by emp_no, dept_name, salary
-having max(salary)
-order by dept_name, max(salary) DESC;#needs more work on selecting the max salary for each deparment
+group by dept_name
+order by max(salary) desc; #need a way to add employee name
