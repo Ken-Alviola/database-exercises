@@ -88,6 +88,15 @@ where to_date > curdate(); #240124 current salaries total so 0.035% of total sal
 #BONUS
 
 #1. Find all the department names that currently have female managers.
+SELECT first_name, last_name, gender, dept_name
+FROM employees
+join dept_emp using (emp_no)
+join departments using (dept_no)
+WHERE emp_no IN (
+    SELECT emp_no
+    FROM dept_manager)
+and gender = 'F'
+;
 
 #2. Find the first and last name of the employee with the highest salary.
 
