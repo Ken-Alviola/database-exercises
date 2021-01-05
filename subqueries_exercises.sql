@@ -69,14 +69,10 @@ select avg(salary)
 #6. How many current salaries are within 1 standard deviation of the current highest salary? (Hint: you can use a built in function to calculate the standard deviation.) What percentage of all salaries is this?
 select count(*)
 from salaries
-where salary in (
-	select salary
-	from salaries
-	where salary > (select max(salary) - stddev(salary)
+where salary > (select max(salary) - stddev(salary)
 					from salaries
 					where to_date > curdate()
 					)
-)
 and to_date > curdate(); #SUPER UGLY but there are 83 current salaries within 1 STDDEV of current highest salary
 
 select count(salary)
