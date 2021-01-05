@@ -99,5 +99,12 @@ and gender = 'F'
 ;
 
 #2. Find the first and last name of the employee with the highest salary.
+select first_name, last_name, salary
+from employees
+join salaries using (emp_no)
+where salary in (
+	select max(salary)
+	from salaries)
+and salaries.to_date > curdate();
 
 #3. Find the department name that the employee with the highest salary works in.
