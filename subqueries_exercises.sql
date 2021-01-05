@@ -108,3 +108,12 @@ where salary in (
 and salaries.to_date > curdate();
 
 #3. Find the department name that the employee with the highest salary works in.
+select first_name, last_name, salary, dept_name
+from employees
+join salaries using (emp_no)
+join dept_emp using (emp_no)
+join departments using (dept_no)
+where salary in (
+	select max(salary)
+	from salaries)
+and salaries.to_date > curdate();
