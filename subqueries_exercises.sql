@@ -28,16 +28,29 @@ join dept_emp using (emp_no)
 where to_date in (select `to_date`
 	from `dept_emp`
 	where to_date < curdate())
-;
+;#91479
 
 #4. Find all the current department managers that are female. List their names in a comment in your code.
-SELECT first_name, last_name, gender, birth_date
+SELECT first_name, last_name, gender
 FROM employees
 WHERE emp_no IN (
     SELECT emp_no
     FROM dept_manager)
 and gender = 'F'
 ;
+/*Isamu	Legleitner	F
+Shirish	Ossenbruggen	F
+Karsten	Sigstam	F
+Krassimir	Wegerle	F
+Rosine	Cools	F
+Leon	DasSarma	F
+Peternela	Onuegbe	F
+Rutger	Hofmeyr	F
+Sanjoy	Quadeer	F
+Hilary	Kambil	F
+Tonny	Butterworth	F
+Marjo	Giarratana	F
+Xiaobin	Spinelli	F*/
 
 #5. Find all the employees who currently have a higher salary than the companies overall, historical average salary.
 select first_name, last_name, salary
