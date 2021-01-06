@@ -38,5 +38,45 @@ set amount_in_cents = amount * 100;
 
 #3. Find out how the current average pay in each department compares to the overall, historical average pay. In order to make the comparison easier, you should use the Z-score for salaries. In terms of salary, what is the best department right now to work for? The worst?
 
-#will finish after lunch
+#temp table for single value used later in z-score calc
+create temporary table historical_avg_salary (select avg(salary) 
+from employees.salaries); #$63810.7448
 
+#sanity check
+select *
+from historical_avg_salary;
+
+#temp table with dept_name and avg_salary grouped by dept_name
+create temporary table department_avg_salary (select dept_name, avg(salary) as avg_salary
+from employees.salaries
+join employees.dept_emp using (emp_no)
+join employees.departments using (dept_no)
+where employees.salaries.to_date > curdate()
+group by dept_name
+ORDER BY avg_salary Desc);
+
+#sanity check
+select * 
+from department_avg_salary;
+
+
+#added z-score column using z=(x-u)/stddev
+select *, round((avg_salary - (select * from historical_avg_salary))
+						/
+						(select stddev(salary)from employees.salaries),3) as z_score
+from department_avg_salary;
+					
+/*					Current
+Dept_name			Avg_salary  Z-score
+Sales				88842.1590	 1.481
+Marketing			80014.6861	 0.959
+Finance				78644.9069	 0.878
+Research			67932.7147	 0.244
+Production			67841.9487	 0.238
+Development			67665.6241	 0.228
+Customer Service	66971.3536	 0.187
+Quality Management	65382.0637	 0.093
+Human Resources		63795.0217	-0.001
+*/
+
+#Sales department is best currently with an average salary 1.48 standard deviations above the historical mean salary for the entire company and HR is the worst which is slightly below the historical mean salary.
