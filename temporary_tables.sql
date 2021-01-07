@@ -64,7 +64,9 @@ from department_avg_salary;
 select *, round(
 				(avg_salary - (select * from historical_avg_salary))
 			                         /
-				(select stddev(salary)from employees.salaries),3) as z_score
+				(select stddev(salary)from employees.salaries)
+				
+				,3) as z_score
 				
 from department_avg_salary;
 					
