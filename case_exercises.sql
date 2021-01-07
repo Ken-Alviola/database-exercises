@@ -50,12 +50,12 @@ SELECT CASE
         WHEN dept_name in ('Production', 'Quality Management') THEN 'Prod & QM'
 		ELSE dept_name
 		END AS dept_group,
-round(AVG(salary), 2) AS avg_salary
+		
+		round(AVG(salary), 2) AS avg_salary
 
-FROM salaries AS s
-JOIN dept_emp AS de ON s.emp_no = de.emp_no
-			AND de.to_date > curdate()
-JOIN departments AS d USING(dept_no)
-where s.to_date > curdate()
+FROM salaries 
+JOIN dept_emp using (emp_no)
+JOIN departments using (dept_no)
+where salaries.to_date > curdate() and dept_emp.to_date > curdate()
 GROUP BY dept_group
 order by avg_salary DESC;
