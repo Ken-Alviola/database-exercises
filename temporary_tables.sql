@@ -61,9 +61,11 @@ from department_avg_salary;
 
 
 #added z-score column using z=(x-u)/stddev
-select *, round((avg_salary - (select * from historical_avg_salary))
-						/
+select *, round(
+				(avg_salary - (select * from historical_avg_salary))
+			                         /
 				(select stddev(salary)from employees.salaries),3) as z_score
+				
 from department_avg_salary;
 					
 /*					Current
