@@ -1,7 +1,8 @@
 #1. Write a query that returns all employees (emp_no), their department number, their start date, their end date, and a new column 'is_current_employee' that is a 1 if the employee is still with the company and 0 if not.
 select emp_no, dept_no, hire_date, to_date, if (to_date > curdate(), true,false) as is_current_employee
 from employees 
-join dept_emp using (`emp_no`);
+join dept_emp using (`emp_no`)
+;
 
 #2. Write a query that returns all employee names (previous and current), and a new column 'alpha_group' that returns 'A-H', 'I-Q', or 'R-Z' depending on the first letter of their last name.
 select first_name, 
@@ -48,6 +49,7 @@ SELECT CASE
 		WHEN dept_name IN ('research', 'development') THEN 'R&D'
         WHEN dept_name IN ('sales', 'marketing') THEN 'Sales & Marketing' 
         WHEN dept_name in ('Production', 'Quality Management') THEN 'Prod & QM'
+        When dept_name in ('Finance','Human Resources') Then 'Finance & HR'
 		ELSE dept_name
 		END AS dept_group,
 		
